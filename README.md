@@ -6,7 +6,26 @@ I build internal systems that run without being watched. For the past year that 
 being the only engineer on two production platforms at once — deciding the architecture,
 deploying it, and being the person who gets called when it breaks.
 
-## What I actually work on
+Most of that code belongs to a client and cannot be published. The repositories below are
+the parts that could be separated from it. Each one is a mechanism I had to get right in
+production, rewritten from nothing against a domain that is mine to publish, with the
+evidence for whatever it claims committed next to it.
+
+## The repositories
+
+| | What it is | Why it might be worth opening |
+|---|---|---|
+| **[llm-spend-governor](https://github.com/sevamrk/llm-spend-governor)** | Counts every model call a process makes, prices it, and refuses the next one before it is sent | The estimator is measured against the bill on ten request shapes. Nine are covered. The tenth is a defect the README states rather than patches |
+| **[document-segmentation-eval](https://github.com/sevamrk/document-segmentation-eval)** | Carves long documents into their sections through four tiers, the last of which is a person | An ablation report switches each mechanism off and prints what breaks, including the rows where nothing breaks and what that does not prove |
+| **[tender-relevance-classifier](https://github.com/sevamrk/tender-relevance-classifier)** | A model says what a procurement notice is; a deterministic gate decides what happens to it | `make trace` prints one notice through every stage, replayed, so the argument can be checked without an API key |
+| **[scheduled-llm-picks](https://github.com/sevamrk/scheduled-llm-picks)** | A scheduled model call that always delivers something usable: validate, retry with the reason, then a deterministic fallback | Measured over two hundred runs against a model rigged to fail. Sixty-three first attempts were unusable and every run still delivered |
+| **[vault-rag-mcp](https://github.com/sevamrk/vault-rag-mcp)** | Hybrid retrieval over a markdown vault, served as an MCP server | Keyword and vector branches fused by rank, then a cross-encoder reranker, which the evaluation shows losing to plain fusion on the demo corpus |
+| **[bank-transfers-tracker](https://github.com/sevamrk/bank-transfers-tracker)** | Syncs personal finances across two banks that have nothing in common | One has a REST API. The other has no API at all and a CSV export whose headers change with the account's locale |
+
+Each one runs its tests on a clean clone with no credentials, has CI proving it, and a README
+that says what the thing does not do.
+
+## The work behind them
 
 **A tender-automation platform for a business-travel agency.** Public procurement notices
 arrive continuously; a model reads and classifies them for relevance, pulls the full document
@@ -28,26 +47,13 @@ bundle before filling so each form fails in isolation instead of taking the pack
 circuit-breaker built after a real cost leak, webhook de-duplication, retry and backoff against
 an unreliable vendor API, and static eval checks wrapped around a non-deterministic core.
 
-## Here
-
-Most of what I have built is a client's and cannot be published. What is here is either
-mine outright or rebuilt from scratch to be shareable.
-
-- **[bank-transfers-tracker](https://github.com/Scorpez/bank-transfers-tracker)** — syncing personal finances
-  across two banks with incompatible interfaces: one has a REST API, the other has no API at
-  all and a CSV export whose column headers change with the account's locale. Small, tested,
-  and honest about the awkward parts.
-
-*More landing here as it is rebuilt clean — a retrieval-augmented notes server, and a
-public-tender pipeline running against real procurement documents with a fictional company
-profile.*
-
 ## Working with
 
 Python · SQL and Postgres · TypeScript · n8n · Docker · LLM APIs · CRM platforms
 
 ## Elsewhere
 
-- [LinkedIn](https://linkedin.com/in/vsevolod-markov)
-- Barcelona, Spain — authorised to work in Spain, no sponsorship required
-- Russian and English natively, Spanish at B2 and climbing
+[LinkedIn](https://linkedin.com/in/vsevolod-markov) is the best way to reach me.
+
+Barcelona, Spain — authorised to work here, no sponsorship required. Russian and English
+natively, Spanish at B2 and climbing.
