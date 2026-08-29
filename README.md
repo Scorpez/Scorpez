@@ -11,6 +11,36 @@ the parts that could be separated from it. Each one is a mechanism I had to get 
 production, rewritten from nothing against a domain that is mine to publish, with the
 evidence for whatever it claims committed next to it.
 
+## Where they came from
+
+```mermaid
+flowchart TD
+    subgraph prod["one production pipeline - most of it belongs to a client"]
+        direction TB
+        A["procurement notices arrive continuously"] --> B["decide which are worth bidding"]
+        B --> C["pull the document archive"]
+        C --> D["carve a bundled pack into its separate forms"]
+        D --> E["fill each form from a verified profile, or refuse"]
+        E --> F["a person reviews, then submits a binding bid"]
+    end
+    subgraph mine["systems that are mine outright"]
+        direction TB
+        G["a daily digest that must not arrive empty"]
+        H["four thousand markdown notes worth searching"]
+        I["two banks with nothing in common"]
+    end
+    B -.-> R1["tender-relevance-classifier"]
+    D -.-> R2["document-segmentation-eval"]
+    E -.-> R3["llm-spend-governor"]
+    G -.-> R4["scheduled-llm-picks"]
+    H -.-> R5["vault-rag-mcp"]
+    I -.-> R6["bank-transfers-tracker"]
+```
+
+The dotted edges are the honest part. Nothing was copied across them: the mechanism is
+the same and the domain, the prompts, the fixtures and the corpus were written from
+nothing, because a find-and-replace over a client's business rules is not a rewrite.
+
 ## The repositories
 
 | | What it is | Why it might be worth opening |
