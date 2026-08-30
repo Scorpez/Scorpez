@@ -3,12 +3,12 @@
 Automation and applied AI, based in Barcelona.
 
 I build internal systems that run without being watched. For the past year that has meant
-being the only engineer on two production platforms at once — deciding the architecture,
+being the only engineer on two production platforms at once. Deciding the architecture,
 deploying it, and being the person who gets called when it breaks.
 
 Most of that code belongs to a client and cannot be published. The repositories below are
 the parts that could be separated from it. Each one is a mechanism I had to get right in
-production, rewritten from nothing against a domain that is mine to publish, with the
+production, rewritten from nothing against a domain that's mine to publish, with the
 evidence for whatever it claims committed next to it.
 
 ## Where they came from
@@ -39,7 +39,7 @@ flowchart TD
 
 The dotted edges are the honest part. Nothing was copied across them: the mechanism is
 the same and the domain, the prompts, the fixtures and the corpus were written from
-nothing, because a find-and-replace over a client's business rules is not a rewrite.
+nothing, because a find-and-replace over a client's business rules isn't a rewrite.
 
 ## The repositories
 
@@ -53,20 +53,20 @@ nothing, because a find-and-replace over a client's business rules is not a rewr
 | **[bank-transfers-tracker](https://github.com/sevamrk/bank-transfers-tracker)** | Syncs personal finances across two banks that have nothing in common | One has a REST API. The other has no API at all and a CSV export whose headers change with the account's locale |
 
 Each one runs its tests on a clean clone with no credentials, has CI proving it, and a README
-that says what the thing does not do.
+that says what the thing doesn't do.
 
 ## The work behind them
 
 **A tender-automation platform for a business-travel agency.** Public procurement notices
 arrive continuously; a model reads and classifies them for relevance, pulls the full document
 archive, and writes structured requirements into the CRM. One click then splits a bundled
-procurement pack — Russian law puts 5–15 distinct forms inline in a single file, each of which
-must be submitted separately — into standalone documents, fills them from a verified company
+procurement pack. Russian law puts 5–15 distinct forms inline in a single file, each of which
+must be submitted separately. Into standalone documents, fills them from a verified company
 profile, and hands them back submission-ready. It took the team from roughly one or two
 tenders a day to about ten.
 
 **The part I find more interesting than the automation:** the output is a bid under public
-procurement regulation, and it is binding once filed. So no price and no tender-specific value
+procurement regulation, and it's binding once filed. So no price and no tender-specific value
 is ever model-generated. Only profile-verified data is written, every filled pack lands in a
 review state before a person submits it, and the fill logic fails blank rather than failing
 wrong. Getting that right meant negative tests guarding the wrong-fill direction, per-shape
@@ -85,5 +85,5 @@ Python · SQL and Postgres · TypeScript · n8n · Docker · LLM APIs · CRM pla
 
 [LinkedIn](https://linkedin.com/in/vsevolod-markov) is the best way to reach me.
 
-Barcelona, Spain — authorised to work here, no sponsorship required. Russian and English
+Barcelona, Spain. Authorised to work here, no sponsorship required. Russian and English
 natively, Spanish at B2 and climbing.
