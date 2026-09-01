@@ -55,8 +55,8 @@ nothing, because a find-and-replace over a client's business rules isn't a rewri
 | **[bank-transfers-tracker](https://github.com/sevamrk/bank-transfers-tracker)** | Syncs personal finances across two banks that have nothing in common | One has a REST API. The other has no API at all and a CSV export whose headers change with the account's locale |
 | **[business-mapping](https://github.com/sevamrk/business-mapping)** | Writes down every function a company performs, then works out which of them an agent could drive today | Automatability is the field everyone fills in with a number they made up. The map is not allowed to state it: it states seven checkable facts per function and the tool derives the verdict |
 
-Each one runs its tests on a clean clone with no credentials, and has a README that says what
-the thing doesn't do.
+Each one runs its tests on a clean clone with no credentials, has CI proving it, and a README
+that says what the thing doesn't do.
 
 ## The work behind them
 
