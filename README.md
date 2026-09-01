@@ -6,7 +6,7 @@ I build internal systems that run without being watched. For the past year that 
 being the only engineer on two production platforms at once. Deciding the architecture,
 deploying it, and being the person who gets called when it breaks.
 
-Most of that code belongs to a client and cannot be published. The repositories below are
+Most of that code belongs to a client and cannot be published. Most of the repositories below are
 the parts that could be separated from it. Each one is a mechanism I had to get right in
 production, rewritten from nothing against a domain that's mine to publish, with the
 evidence for whatever it claims committed next to it.
@@ -29,12 +29,14 @@ flowchart TD
         H["four thousand markdown notes worth searching"]
         I["two banks with nothing in common"]
     end
+    K["consulting work mapping what a company does"]
     B -.-> R1["tender-relevance-classifier"]
     D -.-> R2["document-segmentation-eval"]
     E -.-> R3["llm-spend-governor"]
     G -.-> R4["scheduled-llm-picks"]
     H -.-> R5["vault-rag-mcp"]
     I -.-> R6["bank-transfers-tracker"]
+    K -.-> R7["business-mapping"]
 ```
 
 The dotted edges are the honest part. Nothing was copied across them: the mechanism is
@@ -51,9 +53,10 @@ nothing, because a find-and-replace over a client's business rules isn't a rewri
 | **[scheduled-llm-picks](https://github.com/sevamrk/scheduled-llm-picks)** | A scheduled model call that always delivers something usable: validate, retry with the reason, then a deterministic fallback | Measured over two hundred runs against a model rigged to fail. Sixty-three first attempts were unusable and every run still delivered |
 | **[vault-rag-mcp](https://github.com/sevamrk/vault-rag-mcp)** | Hybrid retrieval over a markdown vault, served as an MCP server | Keyword and vector branches fused by rank, then a cross-encoder reranker, which the evaluation shows losing to plain fusion on the demo corpus |
 | **[bank-transfers-tracker](https://github.com/sevamrk/bank-transfers-tracker)** | Syncs personal finances across two banks that have nothing in common | One has a REST API. The other has no API at all and a CSV export whose headers change with the account's locale |
+| **[business-mapping](https://github.com/sevamrk/business-mapping)** | Writes down every function a company performs, then works out which of them an agent could drive today | Automatability is the field everyone fills in with a number they made up. The map is not allowed to state it: it states seven checkable facts per function and the tool derives the verdict |
 
-Each one runs its tests on a clean clone with no credentials, has CI proving it, and a README
-that says what the thing doesn't do.
+Each one runs its tests on a clean clone with no credentials, and has a README that says what
+the thing doesn't do.
 
 ## The work behind them
 
@@ -79,7 +82,7 @@ an unreliable vendor API, and static eval checks wrapped around a non-determinis
 
 ## Working with
 
-Python · SQL and Postgres · TypeScript · n8n · Docker · LLM APIs · CRM platforms
+Python · SQL and Postgres · TypeScript · Docker · LLM APIs · workflow automation · CRM platforms
 
 ## Elsewhere
 
