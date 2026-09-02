@@ -15,21 +15,32 @@ evidence for whatever it claims committed next to it.
 
 ```mermaid
 flowchart TD
-    subgraph prod["one production pipeline - most of it belongs to a client"]
+    subgraph CLIENT["A client's pipeline. Most of it cannot be published."]
         direction TB
-        A["procurement notices arrive continuously"] --> B["decide which are worth bidding"]
-        B --> C["pull the document archive"]
-        C --> D["carve a bundled pack into its separate forms"]
-        D --> E["fill each form from a verified profile, or refuse"]
-        E --> F["a person reviews, then submits a binding bid"]
+        A["procurement notices<br/>arrive continuously"]
+        B["decide which are<br/>worth bidding"]
+        C["pull the full<br/>document archive"]
+        D["carve a bundled pack<br/>into its separate forms"]
+        E["fill each form from a<br/>verified profile, or refuse"]
+        F["a person reviews, then<br/>files a binding bid"]
+        A --> B --> C --> D --> E --> F
     end
-    subgraph mine["systems that are mine outright"]
+
+    subgraph OWN["Mine outright"]
         direction TB
-        G["a daily digest that must not arrive empty"]
-        H["four thousand markdown notes worth searching"]
-        I["two banks with nothing in common"]
+        G["a daily digest that<br/>must not arrive empty"]
+        H["four thousand notes<br/>worth searching"]
+        I["two banks with<br/>nothing in common"]
+        G ~~~ H ~~~ I
     end
-    K["consulting work mapping what a company does"]
+
+    subgraph ADVISE["Consulting work"]
+        K["mapping what a<br/>company actually does"]
+    end
+
+    F ~~~ G
+    I ~~~ K
+
     B -.-> R1["tender-relevance-classifier"]
     D -.-> R2["document-segmentation-eval"]
     E -.-> R3["llm-spend-governor"]
@@ -37,11 +48,29 @@ flowchart TD
     H -.-> R5["vault-rag-mcp"]
     I -.-> R6["bank-transfers-tracker"]
     K -.-> R7["business-mapping"]
+
+    R1 ~~~ R2 ~~~ R3 ~~~ R4 ~~~ R5 ~~~ R6 ~~~ R7
+
+    classDef stage fill:#eff2f6,stroke:#aeb7c2,stroke-width:1px,color:#3d4551
+    classDef origin fill:#fdf2dd,stroke:#cf9722,stroke-width:2px,color:#5a3d05
+    classDef domain fill:#eaf2ed,stroke:#5f9b74,stroke-width:2px,color:#1d4630
+    classDef repo fill:#e9f0fc,stroke:#3a72d0,stroke-width:2px,color:#123163
+
+    class A,C,F stage
+    class B,D,E origin
+    class G,H,I,K domain
+    class R1,R2,R3,R4,R5,R6,R7 repo
+
+    style CLIENT fill:transparent,stroke:#9aa4b2,stroke-dasharray:4 4
+    style OWN fill:transparent,stroke:#9aa4b2,stroke-dasharray:4 4
+    style ADVISE fill:transparent,stroke:#9aa4b2,stroke-dasharray:4 4
 ```
 
 The dotted edges are the honest part. Nothing was copied across them: the mechanism is
 the same and the domain, the prompts, the fixtures and the corpus were written from
 nothing, because a find-and-replace over a client's business rules isn't a rewrite.
+Only three of the six steps in that pipeline turned into something I could publish. The
+grey ones stayed where they are.
 
 ## The repositories
 
